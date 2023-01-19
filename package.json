@@ -1,0 +1,36 @@
+{
+  "name": "e-store",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.mjs",
+    "dev": "nodemon server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mairajk/JWT-with-React-and-Express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mairajk/JWT-with-React-and-Express/issues"
+  },
+  "homepage": "https://github.com/Mairajk/JWT-with-React-and-Express#readme",
+  "dependencies": {
+    "axios": "^1.2.1",
+    "bcrypt-inzi": "^1.0.7",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase-admin": "^11.4.1",
+    "formik": "^2.2.9",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.20",
+    "styled-components": "^5.3.6",
+    "yup": "^0.32.11"
+  },
+  "description": ""
+}
