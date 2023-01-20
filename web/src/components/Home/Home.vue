@@ -1,55 +1,93 @@
 <script>
 import axios from "axios";
-
+import moment from 'moment';
+import Posting from './HomeComponents/Posting.vue'
 export default {
     name: 'Home',
     props: ['msg'],
+    components: {
+        Posting
+    },
 
     data() {
-        // console.log('after call data' , this.data.promise);
-        try {
-            let res = axios.get('http://localhost:5001/api/v1/posts');
-            console.log('res ==>', res);
-            this.data = res;
-            console.log('data ==>', this.data);
-        } catch (err) {
-            console.log('error ===>', err);
-        }
         return {
             data: '',
+            postDate: ''
         }
     },
-    // methods: {
-    //     getAllPosts() {
-    //         try {
-    //             let res = axios.get('http://localhost:/5001/posts');
+    methods: {
+        moment: function () {
+            return moment();
+        }
+    },
 
-    //         }
-    //         catch (err) {
-    //             console.log('error ===>', err);
-    //         }
-    //     }
-    // },
-
-    // created() {
-    //     console.log(this.msg);
-    //     try {
-    //         this.data = axios.get('http://localhost:5001/api/v1/posts');
-    //         //  = res.data;
-    //         console.log('data ==>', this.data);
-    //         console.log('data ==>', this.data.data);
-    //     } catch (err) {
-    //         console.log('error ===>', err);
-    //     }
-    // },
+    created() {
+        axios.get('http://localhost:5001/api/v1/posts')
+            .then((res) => {
+                console.log('response', res);
+                this.data = res.data;
+                console.log('data', this.data);
+            })
+            .catch((err) => {
+                console.log('err', err);
+            })
+    },
 }
 </script>
 
 <template>
-<div>
+<div class="home">
     <h1>{{ msg }}</h1>
+    <Posting />
 
-    <div>
+    <div class="posts">
+        <div class="eachPost" v-for="post in data.data">
+
+            <!-- <p>{{ post.date }}</p> -->
+            <p class="postDate">{{moment(post.date).format('MMM Do YYYY, h:mm:ss a')}}</p>
+
+            <h3 class="postText">{{ post.postText }}</h3>
+
+            <img :src='post.postImage'>
+
+        </div>
     </div>
 </div>
 </template>
+
+<style>
+.home {
+    background-color: gainsboro;
+    padding: 50px;
+    width: 100%;
+}
+
+.eachPost {
+    border: none;
+    border-radius: 15px;
+    background-color: white;
+    padding: 10px 0px;
+    margin: 20px auto;
+    width: 350px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.eachPost img {
+    width: 99.5%;
+    margin: 10px auto;
+}
+
+.eachPost .postDate {
+    color: gray;
+    font-size: 12px;
+    margin: 10px 0px;
+    padding: 0px 10px;
+}
+
+.eachPost .postText {
+    padding: 5px 10px;
+}
+</style>
